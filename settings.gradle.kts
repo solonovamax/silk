@@ -18,6 +18,7 @@ include("$projectName-igui")
 include("$projectName-nbt")
 include("$projectName-network")
 include("$projectName-persistence")
+include("$projectName-rendering")
 
 //include("$projectName-paper")
 

@@ -30,5 +30,6 @@ object BuildConstants {
         "nbt",
         "network",
         "persistence",
+        "rendering",
     )
 }
