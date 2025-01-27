@@ -13,7 +13,7 @@ allprojects {
     // It does NOT have to match the most recent development version of Silk,
     // since Paper releases for new Minecraft versions
     // might come much later than Fabric releases.
-    version = "1.11.0"
+    version = "1.11.0-all-prs-SNAPSHOT"
 }
 
 repositories {

@@ -21,6 +21,16 @@ publishing {
                     "https://s01.oss.sonatype.org/content/repositories/snapshots"
             )
         }
+        maven {
+            name = "SoloStudiosSnapshots"
+
+            url = uri("https://maven.solo-studios.ca/snapshots/")
+
+            credentials(PasswordCredentials::class)
+            authentication { // publishing doesn't work without this for some reason
+                create<BasicAuthentication>("basic")
+            }
+        }
     }
 
     publications {
@@ -65,5 +75,21 @@ publishing {
 }
 
 signing {
+    // Allow specifying the key, key id, and password via environment variables.
+    val signingKey: String? by project
+    val signingKeyId: String? by project
+    val signingPassword: String? by project
+
+    when {
+        signingKey != null && signingKeyId != null && signingPassword != null -> {
+            useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
+        }
+
+        signingKey != null && signingPassword != null -> {
+            useInMemoryPgpKeys(signingKey, signingPassword)
+        }
+
+        else -> useGpgCmd()
+    }
     sign(publishing.publications)
 }
